@@ -164,6 +164,12 @@ config.keys = {
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 
+	{
+		key = "x",
+		mods = "LEADER",
+		action = wezterm.action.CloseCurrentPane({ confirm = false }),
+	},
+
 	-- tab
 	{
 		key = "d",
