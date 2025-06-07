@@ -5,7 +5,13 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   config = function()
-    require("telescope").setup({})
+    require("telescope").setup({
+      extensions = {
+        find_files = {
+          hidden = true,
+        },
+      },
+    })
     pcall(function()
       require("telescope").load_extension("fzf")
     end)
