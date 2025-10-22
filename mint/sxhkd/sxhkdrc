@@ -1,0 +1,54 @@
+# --- GlazeWM-like keybindings for BSPWM ---
+
+super + shift+ q
+    bspc node --close
+
+# Program launcher (rofi)
+super + d
+    rofi -show drun
+
+# Terminal
+super + Return
+    kitty
+
+# Focus window in direction
+super + {h,j,k,l}
+    bspc node -f {west,south,north,east}
+
+# Move window in direction
+super + shift + {h,j,k,l}
+    bspc node -s {west,south,north,east}
+
+
+# Resize window (optional)
+super + ctrl + {h,j,k,l}
+    bspc node -z {left -20 0,right +20 0,top 0 -20,bottom 0 +20}
+
+# Split horizontally/vertically toggle
+super + enter
+    bspc node -p south
+
+# Toggle floating
+super + space
+    bspc node -t \~floating
+
+# Close window
+super + q
+    bspc node -c
+
+# Restart window manager
+super + ctrl + r
+    bspc wm -r
+
+# Quit bspwm (log out)
+super + alt + q
+    pkill bspwm
+
+# Switch workspaces (desktops)
+super + {1-9}
+    bspc desktop -f {1-9}
+
+# Move focused window to another workspace
+super + shift + {1-9}
+    bspc node -d {1-9}
+

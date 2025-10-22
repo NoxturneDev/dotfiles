@@ -1,0 +1,38 @@
+[module/workspaces]
+type = internal/bspwm
+enable-scroll = false
+
+[module/date]
+type = internal/date
+interval = 5
+date = %a %d %b %H:%M
+
+[module/volume]
+type = internal/volume
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+
+[bar/mainbar]
+width = 100%
+height = 26
+monitor = eDP-1
+background = #222222
+foreground = #ffffff
+font-0 = JetBrainsMono Nerd Font:size=10;2
+modules-left = workspaces
+modules-center = date
+modules-right = battery volume
+
+[bar/external]
+width = 100%
+background = #222222
+foreground = #ffffff
+monitor = HDMI-1
+font-0 = JetBrainsMono Nerd Font:size=10;2
+modules-left = workspaces
+modules-center = date
+modules-right = battery volume
+
