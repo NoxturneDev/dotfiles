@@ -35,7 +35,7 @@ return {
     priority = 1000, -- load before LazyVim sets colorscheme
     opts = {
       flavour = "mocha", -- explicitly use mocha
-      transparent_background = false, -- optional
+      transparent_background = true, -- optional
       integrations = {
         aerial = true,
         alpha = true,

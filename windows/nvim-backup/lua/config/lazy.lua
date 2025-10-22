@@ -7,23 +7,6 @@ end
 
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 vim.g.nofsync = true
-vim.g.autoformat = false
-
--- auto change keyboard layout on windows environtment
--- insert: colemak-dh
--- default: qwerty
--- vim.api.nvim_create_autocmd("InsertEnter", {
---   callback = function()
---
---     vim.fn.jobstart({ "C:\\users\\galih\\change_layout.exe" }, { detach = true })
---   end,
--- })
---
--- vim.api.nvim_create_autocmd("InsertLeave", {
---   callback = function()
---     vim.fn.jobstart({ "C:\\users\\galih\\change_layout.exe" }, { detach = true })
---   end,
--- })
 
 -- change default terminal (Windows only)
 vim.opt.shell = "powershell"

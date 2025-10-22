@@ -17,12 +17,6 @@ keymap.set("n", "<Leader>D", '"_D')
 keymap.set("v", "<Leader>d", '"_d')
 keymap.set("v", "<Leader>D", '"_D')
 
--- Center before navigating
-keymap.set("n", "*", "*zz")
-keymap.set("n", "<C-d>", "<C-d>zz", opts)
-keymap.set("n", "<C-u>", "<C-u>zz", opts)
-keymap.set("n", "<C-o>", "<C-o>zz", opts)
-
 -- change default esc
 keymap.set("i", "jj", "<Esc>")
 
@@ -40,20 +34,7 @@ keymap.set("n", "sk", "<C-w>k")
 keymap.set("n", "sj", "<C-w>j")
 keymap.set("n", "sl", "<C-w>l")
 
--- vim.keymap.del("n", "<C-i>")
-keymap.set("n", "<C-i>", "<Plug>luasnip-jump-next", opts)
-
 -- Telescope
 local builtin = require("telescope.builtin")
 
 keymap.set("n", "<C-p>", builtin.find_files, { desc = "Search files" })
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "php",
-  callback = function()
-    vim.opt.shiftwidth = 4
-    vim.opt.tabstop = 4
-    vim.opt.softtabstop = 4
-    vim.opt.expandtab = true
-  end,
-})

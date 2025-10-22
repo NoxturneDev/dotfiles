@@ -16,19 +16,11 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    enable = false,
     opts = {
-      codelens = {
-        enabled = false,
-      },
-      autoformat = false, -- disable auto-formatting
       servers = {
         lua_ls = {
           settings = {
             Lua = {
-              workspace = {
-                checkThirdParty = false, -- <- this disables Lua LS built-in workspace checking
-              },
               format = {
                 enable = false, -- <- this disables Lua LS built-in formatting
               },

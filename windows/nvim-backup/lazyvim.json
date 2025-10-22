@@ -1,7 +1,6 @@
 {
   "extras": [
     "lazyvim.plugins.extras.ai.copilot",
-    "lazyvim.plugins.extras.editor.harpoon2",
     "lazyvim.plugins.extras.lang.ansible",
     "lazyvim.plugins.extras.lang.clangd",
     "lazyvim.plugins.extras.lang.cmake",
@@ -28,7 +27,7 @@
   "install_version": 7,
   "news": {
     "NEWS.md": "10960",
-    "doc/news.txt": "25639"
+    "doc/news.txt": "25349"
   },
   "version": 8
 }
