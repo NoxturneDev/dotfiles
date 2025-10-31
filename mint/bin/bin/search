@@ -1,0 +1,66 @@
+#!/bin/bash
+
+function usage
+{
+    echo """
+Usage:
+
+    To search for something simply use 'search for':
+
+        search for [keyword]
+
+    You can restrict the search to a particular path by adding 'in [path]':
+
+        search for [keyword] in [path]
+
+    The following options are also supported:
+
+        -c | --case-sensitive
+        -s | --show-filenames-only
+
+    Examples:
+
+        search for keyword in ./
+
+        search in ../ for Keyword --case-sensitive
+
+        search -s in ../ for keyword
+"""
+}
+
+directory=.
+case=i
+verbose=H
+while [ "$1" != "" ]; do
+    case $1 in
+        for | -f | --for )
+            shift
+            text=$1
+            ;;
+        in | --in | -i )
+            shift
+            directory=$1
+            ;;
+        -h | --help )
+            usage
+            exit
+            ;;
+        -c | --case-sensitive )
+            case=
+            ;;
+        -s | --show-filenames-only )
+            verbose=l
+            ;;
+        * )
+            usage
+            exit 1
+    esac
+    shift
+done
+
+if [ "$directory" == "" -o "$text" == "" ]; then
+    usage
+    exit 1
+fi
+
+GREP_COLORS='fn=94' find $directory -type f -exec grep -$case$verbose "$text" --color=auto -n {} \;
