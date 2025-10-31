@@ -1,19 +1,14 @@
 #!/bin/sh
+# Launch sxhkd for keybinding
+xrandr --output eDP-1 --auto --primary --pos 0x0
+xrandr --output HDMI-1 --mode 2880x1620 --scale 1.2x1.2 --pos -768x-1944
 
-# Launch sxhkd for keybindings
-xrandr --output HDMI-1 --above eDP-1
-pgrep -x sxhkd > /dev/null || sxhkd &
-
-# Set your terminal and border style
-bspc config border_width         2
-bspc config window_gap           10
+pgrep -x sxhkd >/dev/null || sxhkd &
+bspc config border_width 2
+bspc config window_gap 8
 bspc config focused_border_color "#89b4fa"
-bspc config normal_border_color  "#313244"
+bspc config normal_border_color "#313244"
 
 # Automatically start polybar
 ~/.config/polybar/launch.sh &
-
-# Monitor setup (optional)
-bspc monitor HDMI-1 -d 1 2 3 4 5
-bspc monitor eDP-1 -d 6 7 8 9 0
-
+~/.config/bspwm/monitors/auto_detect.sh &
