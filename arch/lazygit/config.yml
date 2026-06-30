@@ -1,0 +1,87 @@
+git:
+  paging:
+    colorArg: always
+    pager: cat
+  diffContextSize: 2
+
+gui:
+  showIcons: true
+  scrollHeight: 5
+  scrollSpeed: 2
+  showFileIcons: true
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    searchingActiveBorderColor:
+      - cyan
+      - bold
+    selectedLineBgColor:
+      - cyan
+    cherryPickedCommitBgColor:
+      - blue
+    cherryPickedCommitFgColor:
+      - blue
+    unstagedChangesColor:
+      - red
+
+os:
+  edit: "nvim {{filename}} -c 'GFloatDiff'"
+  editAtLine: "nvim +{{line}} {{filename}} -c 'GFloatDiff'"
+  editAtLineAndWait: "nvim +{{line}} {{filename}} -c 'GFloatDiff'"
+
+keybinding:
+  files:
+    toggleStagedAll: a
+    toggleStaged: space
+    toggleUnstaged: u
+  commits:
+    checkout: Space
+    resetCommitAuthor: a
+    revertCommit: Z
+  branches:
+    forceCheckout: F
+    rebaseBranch: r
+    mergeIntoBranch: M
+    renameBranch: R
+  stash:
+    pop: Space
+  commitsFiles:
+    checkout: Space
+  universal:
+    increaseContextInDiffView: "}"
+    decreaseContextInDiffView: "{"
+  mainPanel:
+    scrollUp: k
+    scrollDown: j
+    scrollUpHalf: ctrl-u
+    scrollDownHalf: ctrl-d
+    prevPage: ","
+    nextPage: "."
+    gotoTop: "<"
+    gotoBottom: ">"
+    toggleFile: enter
+    openDiff: o
+    close: esc
+    confirm: enter
+    togglePanel: tab
+    prevTab: shift-tab
+    nextTab: tab
+    undo: z
+    redo: Z
+    prevBlock: h
+    nextBlock: l
+  diff:
+    toggleFile: enter
+    scrollUp: k
+    scrollDown: j
+    scrollUpHalf: ctrl-u
+    scrollDownHalf: ctrl-d
+    gotoTop: "<"
+    gotoBottom: ">"
+    openDiff: o
+    close: esc
+  status:
+    checkForConflicts: space

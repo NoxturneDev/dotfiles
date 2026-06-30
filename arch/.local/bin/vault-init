@@ -1,0 +1,172 @@
+#!/bin/bash
+# Description: Initializes project structure in Obsidian vault for agent workflow.
+# Usage: vault-init <project-name> [--migrate=path]
+
+set -e
+
+VAULT_DIR="/mnt/workspace/projects/my-notes"
+VAULT_PROJECTS="$VAULT_DIR/projects"
+
+# Colors
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+BLUE='\e[34m'
+BOLD='\e[1m'
+RESET='\e[0m'
+
+usage() {
+    echo "Usage: vault-init <project-name> [--migrate=<path>]"
+    echo ""
+    echo "Creates project structure in vault for agent workflow."
+    echo ""
+    echo "Arguments:"
+    echo "  project-name              Name of the project"
+    echo "  --migrate=<path>          Migrate existing .agents/ directory to vault"
+    echo "                            (accepts project root or .agents path directly)"
+    echo ""
+    echo "Examples:"
+    echo "  vault-init ziad-laravel-template"
+    echo "  vault-init my-app --migrate=/mnt/workspace/projects/my-app"
+    echo "  vault-init my-app --migrate=/mnt/workspace/projects/my-app/.agents"
+    exit 1
+}
+
+if [ $# -lt 1 ]; then
+    usage
+fi
+
+PROJECT_NAME="$1"
+MIGRATE_PATH=""
+
+# Parse optional arguments
+for arg in "$@"; do
+    case $arg in
+        --migrate=*)
+            MIGRATE_PATH="${arg#*=}"
+            ;;
+    esac
+done
+
+echo -e "${BLUE}[vault-init]${RESET} Project: ${BOLD}$PROJECT_NAME${RESET}"
+
+# Validate project name (no slashes, spaces)
+if [[ "$PROJECT_NAME" == *"/"* ]] || [[ "$PROJECT_NAME" == *" "* ]]; then
+    echo -e "${RED}Error: Project name cannot contain slashes or spaces.${RESET}" >&2
+    exit 1
+fi
+
+# Check vault exists
+if [ ! -d "$VAULT_DIR" ]; then
+    echo -e "${RED}Error: Obsidian vault not found at '$VAULT_DIR'${RESET}" >&2
+    exit 1
+fi
+
+# Create project directory structure
+PROJECT_DIR="$VAULT_PROJECTS/$PROJECT_NAME"
+
+echo -e "${BLUE}[vault-init]${RESET} Creating project structure..."
+
+mkdir -p "$PROJECT_DIR/plan/archive"
+mkdir -p "$PROJECT_DIR/logs"
+mkdir -p "$PROJECT_DIR/specs"
+mkdir -p "$PROJECT_DIR/brainstorms"
+
+# Create initial memory.md if not exists
+if [ ! -f "$PROJECT_DIR/memory.md" ]; then
+    cat > "$PROJECT_DIR/memory.md" << EOF
+# $PROJECT_NAME - Project Memory
+
+## Overview
+<!-- Brief description of what this project does -->
+
+## Architecture
+<!-- High-level architecture notes -->
+
+## Key Decisions
+<!-- Record important technical decisions here -->
+
+## Conventions
+<!-- Coding conventions, naming patterns, etc. -->
+
+## Known Issues / Tech Debt
+<!-- Track known issues and technical debt -->
+
+## Useful Links
+<!-- Links to important docs, repos, dashboards -->
+EOF
+    echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/memory.md"
+fi
+
+echo -e "${GREEN}[vault-init]${RESET} Created:"
+echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/plan/"
+echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/plan/archive/"
+echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/logs/"
+echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/specs/"
+echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/brainstorms/"
+
+# Migration
+if [ -n "$MIGRATE_PATH" ]; then
+    # Auto-detect: if path is project root (has .agents subdirectory), use that
+    if [ -d "$MIGRATE_PATH/.agents" ]; then
+        echo -e "${BLUE}[vault-init]${RESET} Detected project root, using $MIGRATE_PATH/.agents"
+        MIGRATE_PATH="$MIGRATE_PATH/.agents"
+    fi
+
+    if [ ! -d "$MIGRATE_PATH" ]; then
+        echo -e "${YELLOW}Warning: Migration path '$MIGRATE_PATH' not found. Skipping migration.${RESET}" >&2
+    else
+        echo -e "${BLUE}[vault-init]${RESET} Migrating from: $MIGRATE_PATH"
+
+        # Migrate plan files
+        if [ -d "$MIGRATE_PATH/plan" ]; then
+            echo -e "${BLUE}[vault-init]${RESET} Migrating plan files..."
+            cp -a "$MIGRATE_PATH/plan/." "$PROJECT_DIR/plan/" 2>/dev/null || true
+            PLAN_COUNT=$(find "$PROJECT_DIR/plan" -type f | wc -l)
+            echo -e "  ${GREEN}✓${RESET} Migrated $PLAN_COUNT plan files"
+        fi
+
+        # Migrate log files
+        if [ -d "$MIGRATE_PATH/logs" ]; then
+            echo -e "${BLUE}[vault-init]${RESET} Migrating log files..."
+            cp -a "$MIGRATE_PATH/logs/." "$PROJECT_DIR/logs/" 2>/dev/null || true
+            LOG_COUNT=$(find "$PROJECT_DIR/logs" -type f | wc -l)
+            echo -e "  ${GREEN}✓${RESET} Migrated $LOG_COUNT log files"
+        fi
+
+        # Migrate any spec files (check common locations)
+        for spec_dir in "$MIGRATE_PATH/specs" "$MIGRATE_PATH/spec" "$MIGRATE_PATH/docs"; do
+            if [ -d "$spec_dir" ]; then
+                echo -e "${BLUE}[vault-init]${RESET} Migrating specs from $(basename "$spec_dir")..."
+                cp -a "$spec_dir/." "$PROJECT_DIR/specs/" 2>/dev/null || true
+            fi
+        done
+
+        echo -e "${GREEN}[vault-init]${RESET} Migration complete. Original files preserved at: $MIGRATE_PATH"
+    fi
+fi
+
+# Create initial contribution-logs.md if not exists
+if [ ! -f "$PROJECT_DIR/logs/contribution-logs.md" ]; then
+    cat > "$PROJECT_DIR/logs/contribution-logs.md" << EOF
+# Contribution Logs - $PROJECT_NAME
+
+## Master Progress Tracker
+
+- Project initialized in vault
+
+## Routine Logs
+
+- $(date +%Y-%m-%d) - Project initialized via vault-init
+EOF
+    echo -e "${GREEN}[vault-init]${RESET} Created initial contribution-logs.md"
+fi
+
+echo ""
+echo -e "${GREEN}${BOLD}[vault-init] Done!${RESET} Project '$PROJECT_NAME' is ready in vault."
+echo -e "Vault path: ${BOLD}$PROJECT_DIR${RESET}"
+echo ""
+echo -e "Next steps:"
+echo -e "  1. Create task note in ${BOLD}11 Task Notes/${RESET}"
+echo -e "  2. Set ${BOLD}**Project:** $PROJECT_NAME${RESET} in task note"
+echo -e "  3. Spawn agent and link to chat"

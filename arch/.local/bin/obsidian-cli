@@ -1,0 +1,22 @@
+#!/bin/bash
+# Obsidian CLI wrapper for agents
+# Usage: obsidian-cli <command> [options]
+#
+# Commands:
+#   open file=<name>       Open a note by name
+#   open path=<path>       Open a note by path
+#   links                  List all links in vault
+#   aliases                List all aliases
+#   task                   List tasks
+#   history:list           List recent files
+#
+# Options:
+#   vault=<name>           Target specific vault (default: first vault found)
+#
+# Examples:
+#   obsidian-cli open file="Master Dashboard"
+#   obsidian-cli open path="11 Task Notes/My Task.md"
+#   obsidian-cli links vault=my-notes
+#   obsidian-cli task
+
+exec /usr/bin/electron37 /usr/lib/obsidian/app.asar "$@"

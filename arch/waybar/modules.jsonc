@@ -172,5 +172,14 @@
     "tooltip": false,
     "format": "󰐥",
     "on-click": "shutdown -h now",
+  },
+  "custom/tailscale": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/tailscale.sh",
+    "return-type": "json",
+    "interval": 10,
+    "on-click": "tailscale up",
+    "on-click-right": "tailscale down",
+    "tooltip": true
   }
 }

@@ -1,4 +1,3 @@
-#test
 #!/bin/bash
 
 WALLPAPERS_DIR="$HOME/.config/wallpapers"

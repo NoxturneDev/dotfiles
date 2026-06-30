@@ -169,3 +169,16 @@ tooltip label {
 #memory {
     color: @sky;
 }
+
+#custom-tailscale {
+    color: #89b4fa; /* A nice Blue for Tailscale */
+    padding: 0 10px;
+}
+
+#custom-tailscale.connected {
+    color: #a6e3a1; /* Green when active */
+}
+
+#custom-tailscale.disconnected {
+    color: #f38ba8; /* Red when down */
+}

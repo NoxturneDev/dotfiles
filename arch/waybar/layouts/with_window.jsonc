@@ -45,6 +45,7 @@
   "modules-right": [
     "group/gright2",
     "group/gright1",
+    "custom/tailscale",
     "custom/ctlcenter"
   ],
   "include": [

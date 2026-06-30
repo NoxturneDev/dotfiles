@@ -60,4 +60,12 @@ return {
       intelephense = {},
     },
   },
+  settings = {
+    gopls = {
+      formatting = {
+        goimports = true,
+      },
+      staticcheck = true,
+    },
+  },
 }
