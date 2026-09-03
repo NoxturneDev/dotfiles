@@ -647,6 +647,7 @@ alias tkill="tmux kill-server"
 alias t="tmux"
 alias ta="tmux attach"
 alias tn="tmux new-session"
+alias clip="wl-copy"
 
 # =================================================================
 # DUAL-ACCOUNT PLATFORM MATRIX (ARCH NATIVE + GOOGLE SECURE CO-PILOT)
@@ -663,3 +664,6 @@ alias agy-p2='mkdir -p ~/.antigravity-work; HOME=$HOME/.antigravity-work agy'
 
 # Added by Antigravity CLI installer
 export PATH="/home/noxturne/.local/bin:$PATH"
+
+# Prevent tmux socket cleanup by systemd-tmpfiles
+export TMUX_TMPDIR="$HOME/.tmux/tmp"
