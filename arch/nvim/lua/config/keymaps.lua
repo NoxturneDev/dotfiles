@@ -95,15 +95,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Agent Monitor: Track all agent code changes
 vim.keymap.set("n", "<leader>am", function()
-  require("plugins.agent-monitor").open()
+  require("agent-monitor").open()
 end, { desc = "Open agent changes quickfix" })
 
 vim.keymap.set("n", "<leader>ar", function()
-  require("plugins.agent-monitor").refresh()
+  require("agent-monitor").refresh()
 end, { desc = "Refresh agent changes" })
 
 vim.keymap.set("n", "<leader>at", function()
-  require("plugins.agent-monitor").toggle_auto_refresh()
+  require("agent-monitor").toggle_auto_refresh()
 end, { desc = "Toggle agent changes auto-refresh" })
 
 -- Show hunks for current file in quickfix

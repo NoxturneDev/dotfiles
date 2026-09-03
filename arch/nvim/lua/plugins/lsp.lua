@@ -58,14 +58,39 @@ return {
     servers = {
       phpactor = false,
       intelephense = {},
-    },
-  },
-  settings = {
-    gopls = {
-      formatting = {
-        goimports = true,
+      vtsls = {
+        settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 1024,
+            },
+            preferences = {
+              disableAutomaticTypingAcquisition = true,
+            },
+          },
+          vtsls = {
+            autoUseWorkspaceTsdk = true,
+          },
+        },
       },
-      staticcheck = true,
+      tsserver = {
+        settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 1024,
+            },
+          },
+        },
+      },
+      ts_ls = {
+        settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 1024,
+            },
+          },
+        },
+      },
     },
   },
 }

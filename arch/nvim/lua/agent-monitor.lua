@@ -30,8 +30,13 @@ end
 
 -- Refresh quickfix with current repo's changes
 function M.refresh()
+  -- Get current working directory
   local cwd = vim.fn.getcwd()
+
+  -- Run aggregation script with current directory
   vim.fn.system('agent-changes-qf ' .. vim.fn.shellescape(cwd))
+
+  -- Parse and set quickfix
   local items = parse_qf_file()
   if #items > 0 then
     vim.fn.setqflist({}, 'r', {
@@ -48,18 +53,23 @@ function M.refresh()
   end
 end
 
+-- Start auto-refresh timer
 function M.start_auto_refresh(interval_ms)
   interval_ms = interval_ms or 5000
+
   if timer then
     timer:stop()
   end
+
   timer = vim.uv.new_timer()
   timer:start(interval_ms, interval_ms, vim.schedule_wrap(function()
     M.refresh()
   end))
+
   vim.notify(string.format('Agent Qf auto-refresh started (%dms interval)', interval_ms), vim.log.levels.INFO)
 end
 
+-- Stop auto-refresh timer
 function M.stop_auto_refresh()
   if timer then
     timer:stop()
@@ -68,6 +78,7 @@ function M.stop_auto_refresh()
   vim.notify('Agent Qf auto-refresh stopped', vim.log.levels.INFO)
 end
 
+-- Toggle auto-refresh
 function M.toggle_auto_refresh()
   if timer then
     M.stop_auto_refresh()
@@ -76,6 +87,7 @@ function M.toggle_auto_refresh()
   end
 end
 
+-- Open quickfix window with agent changes
 function M.open()
   M.refresh()
   vim.cmd('copen')
