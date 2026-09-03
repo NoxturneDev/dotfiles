@@ -1,0 +1,15 @@
+[user]
+	name = Galih Adhi Kusuma
+	email = noxturne.production@gmail.com
+[safe]
+	directory = /var/www/html
+	directory = /home/noxturne/projects/ziad/frontend/ziad-react-template/.worktrees/vite-stable
+	directory = /home/noxturne/projects/ziad/frontend/ziad-react-template/.worktrees/vite-stable
+	directory = /home/noxturne/projects/ziad/frontend/ziad-react-template/.worktrees/vite-stable
+	directory = /home/noxturne/projects/ziad/frontend/ziad-react-template/.worktrees/vite-stable/
+[init]
+	defaultBranch = master
+[diff]
+	tool = neovim
+[difftool]
+	prompt = false

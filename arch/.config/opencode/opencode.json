@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "atlassian": {
+      "type": "local",
+      "command": ["npx", "-y", "@sooperset/mcp-atlassian"],
+      "environment": {
+        "JIRA_URL": "https://intecmultisolution.atlassian.net",
+        "JIRA_EMAIL": "galihkusuma.pro@gmail.com",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+      }
+    }
+  }
+}
