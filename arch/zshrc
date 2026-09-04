@@ -667,3 +667,4 @@ export PATH="/home/noxturne/.local/bin:$PATH"
 
 # Prevent tmux socket cleanup by systemd-tmpfiles
 export TMUX_TMPDIR="$HOME/.tmux/tmp"
+

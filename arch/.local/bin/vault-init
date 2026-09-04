@@ -71,6 +71,7 @@ mkdir -p "$PROJECT_DIR/plan/archive"
 mkdir -p "$PROJECT_DIR/logs"
 mkdir -p "$PROJECT_DIR/specs"
 mkdir -p "$PROJECT_DIR/brainstorms"
+mkdir -p "$PROJECT_DIR/docs"
 
 # Create initial memory.md if not exists
 if [ ! -f "$PROJECT_DIR/memory.md" ]; then
@@ -104,6 +105,7 @@ echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/plan/archive/"
 echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/logs/"
 echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/specs/"
 echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/brainstorms/"
+echo -e "  ${GREEN}✓${RESET} $PROJECT_DIR/docs/"
 
 # Migration
 if [ -n "$MIGRATE_PATH" ]; then
@@ -139,6 +141,24 @@ if [ -n "$MIGRATE_PATH" ]; then
             if [ -d "$spec_dir" ]; then
                 echo -e "${BLUE}[vault-init]${RESET} Migrating specs from $(basename "$spec_dir")..."
                 cp -a "$spec_dir/." "$PROJECT_DIR/specs/" 2>/dev/null || true
+            fi
+        done
+
+        # Migrate docs from project root (if path is project root)
+        PROJECT_ROOT="$MIGRATE_PATH"
+        if [ -d "$PROJECT_ROOT/.agents" ]; then
+            PROJECT_ROOT="$(dirname "$MIGRATE_PATH")"
+        fi
+        if [ -d "$PROJECT_ROOT/docs" ]; then
+            echo -e "${BLUE}[vault-init]${RESET} Migrating docs..."
+            cp -a "$PROJECT_ROOT/docs/." "$PROJECT_DIR/docs/" 2>/dev/null || true
+            DOC_COUNT=$(find "$PROJECT_DIR/docs" -type f | wc -l)
+            echo -e "  ${GREEN}✓${RESET} Migrated $DOC_COUNT doc files"
+        fi
+        # Also copy README and project_overview if they exist
+        for doc_file in "$PROJECT_ROOT/README.md" "$PROJECT_ROOT/project_overview.md"; do
+            if [ -f "$doc_file" ]; then
+                cp "$doc_file" "$PROJECT_DIR/docs/" 2>/dev/null || true
             fi
         done
 
