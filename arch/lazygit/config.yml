@@ -1,9 +1,8 @@
 git:
-  paging:
-    colorArg: always
-    pager: cat
+  diffRenderers:
+    - colorArg: always
+      command: cat
   diffContextSize: 2
-
 gui:
   showIcons: true
   scrollHeight: 5
@@ -26,12 +25,10 @@ gui:
       - blue
     unstagedChangesColor:
       - red
-
 os:
   edit: "nvim {{filename}} -c 'GFloatDiff'"
   editAtLine: "nvim +{{line}} {{filename}} -c 'GFloatDiff'"
   editAtLineAndWait: "nvim +{{line}} {{filename}} -c 'GFloatDiff'"
-
 keybinding:
   files:
     toggleStagedAll: a
