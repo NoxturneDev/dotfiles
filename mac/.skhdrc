@@ -1,0 +1,62 @@
+# =================================================================
+# SKHD CONFIGURATION
+# Vim-Style Space & Window Navigation via Yabai
+# =================================================================
+
+# --- Direct Space Switching (Option + 1..9, 0) ---
+alt - 1 : ~/.local/bin/switch-space 1
+alt - 2 : ~/.local/bin/switch-space 2
+alt - 3 : ~/.local/bin/switch-space 3
+alt - 4 : ~/.local/bin/switch-space 4
+alt - 5 : ~/.local/bin/switch-space 5
+alt - 6 : ~/.local/bin/switch-space 6
+alt - 7 : ~/.local/bin/switch-space 7
+alt - 8 : ~/.local/bin/switch-space 8
+alt - 9 : ~/.local/bin/switch-space 9
+alt - 0 : ~/.local/bin/switch-space 10
+
+# --- Vim Motion Sliding (Option + H / L) ---
+# Option + H -> Slide Left to previous space
+alt - h : ~/.local/bin/switch-space left
+# Option + L -> Slide Right to next space
+alt - l : ~/.local/bin/switch-space right
+# Option + K -> Focus monitor above (North / External monitor)
+alt - k : yabai -m display --focus north 2>/dev/null || true
+# Option + J -> Focus monitor below (South / MacBook screen)
+alt - j : yabai -m display --focus south 2>/dev/null || true
+
+# --- Workspace Back-and-Forth Toggle (Option + Tab) ---
+alt - tab : ~/.local/bin/switch-space toggle
+
+# --- Move Focused Window to Space & Follow Focus (Shift + Option + 1..9, 0) ---
+shift + alt - 1 : yabai -m window --space 1; ~/.local/bin/switch-space 1
+shift + alt - 2 : yabai -m window --space 2; ~/.local/bin/switch-space 2
+shift + alt - 3 : yabai -m window --space 3; ~/.local/bin/switch-space 3
+shift + alt - 4 : yabai -m window --space 4; ~/.local/bin/switch-space 4
+shift + alt - 5 : yabai -m window --space 5; ~/.local/bin/switch-space 5
+shift + alt - 6 : yabai -m window --space 6; ~/.local/bin/switch-space 6
+shift + alt - 7 : yabai -m window --space 7; ~/.local/bin/switch-space 7
+shift + alt - 8 : yabai -m window --space 8; ~/.local/bin/switch-space 8
+shift + alt - 9 : yabai -m window --space 9; ~/.local/bin/switch-space 9
+shift + alt - 0 : yabai -m window --space 10; ~/.local/bin/switch-space 10
+
+# --- Move Focused Window with Vim Motion (Shift + Option + H / L) ---
+shift + alt - h : yabai -m window --space prev; ~/.local/bin/switch-space left
+shift + alt - l : yabai -m window --space next; ~/.local/bin/switch-space right
+# Shift + Option + K -> Move window to monitor above & follow focus
+shift + alt - k : yabai -m window --display north 2>/dev/null; yabai -m display --focus north 2>/dev/null || true
+# Shift + Option + J -> Move window to monitor below & follow focus
+shift + alt - j : yabai -m window --display south 2>/dev/null; yabai -m display --focus south 2>/dev/null || true
+
+# --- Quick Window Placement (Grid snaps in float mode) ---
+# Snap to Left Half
+alt + ctrl - left  : yabai -m window --grid 1:2:0:0:1:1
+# Snap to Right Half
+alt + ctrl - right : yabai -m window --grid 1:2:1:0:1:1
+# Maximize Window Frame
+alt + ctrl - up    : yabai -m window --grid 1:1:0:0:1:1
+# Center Window (80% width/height)
+alt + ctrl - down  : yabai -m window --grid 10:10:1:1:8:8
+
+# --- Reload Configs ---
+ctrl + alt - r : yabai --restart-service; skhd --restart-service

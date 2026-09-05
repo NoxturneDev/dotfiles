@@ -1,0 +1,19 @@
+# Theme
+theme = "Catppuccin Mocha"
+
+# Typography
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+
+# Treat left Option (⌥ / alt) as Alt/Meta key for Tmux & Neovim
+macos-option-as-alt = left
+
+# Disable native Ghostty splits (handled by Tmux)
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+
+# Window styling
+macos-titlebar-style = transparent
+window-padding-x = 8
+window-padding-y = 6
+confirm-close-surface = false

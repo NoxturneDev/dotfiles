@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+# Yabai Configuration (CLI / Floating Mode)
+# Leaves macOS native floating and Spaces functionality intact
+
+# Layout: float (NO auto-tiling)
+yabai -m config layout float
+
+# Mouse integration (optional: hold Option and left-click drag to move, right-click to resize)
+yabai -m config mouse_modifier alt
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+
+# Exclude system utilities and floating-friendly apps
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Stats$" manage=off
+
+echo "yabai configuration loaded successfully"

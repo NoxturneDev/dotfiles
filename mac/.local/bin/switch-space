@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+TARGET="$1"
+PREV_FILE="/tmp/yabai_last_space"
+
+CURR=$(yabai -m query --spaces --space 2>/dev/null | jq '.index')
+[ -z "$CURR" ] && CURR=1
+
+if [ "$TARGET" = "prev" ] || [ "$TARGET" = "left" ]; then
+    echo "$CURR" > "$PREV_FILE"
+    skhd -k "ctrl - left"
+    exit 0
+fi
+
+if [ "$TARGET" = "next" ] || [ "$TARGET" = "right" ]; then
+    echo "$CURR" > "$PREV_FILE"
+    skhd -k "ctrl - right"
+    exit 0
+fi
+
+if [ "$TARGET" = "recent" ] || [ "$TARGET" = "toggle" ]; then
+    if [ -f "$PREV_FILE" ]; then
+        TARGET=$(cat "$PREV_FILE")
+    else
+        TARGET=2
+    fi
+fi
+
+if [ "$TARGET" != "$CURR" ] && [ -n "$TARGET" ]; then
+    echo "$CURR" > "$PREV_FILE"
+    KEY="$TARGET"
+    [ "$TARGET" = "10" ] && KEY="0"
+    skhd -k "ctrl - $KEY"
+fi

@@ -1,0 +1,183 @@
+# AeroSpace Configuration
+# Translated from Hyprland config (arch/hypr/configs/keybinds.conf)
+
+config-version = 2
+start-at-login = false
+auto-reload-config = true
+
+# Layout
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+accordion-padding = 30
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Unhide apps automatically if hidden by accident
+automatically-unhide-macos-hidden-apps = true
+
+# Mouse follows focus
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Persistent Workspaces (1-10 + scratchpad 'magic')
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "magic"]
+
+# Key mapping preset
+key-mapping.preset = 'qwerty'
+
+# Gaps
+gaps.inner.horizontal = 8
+gaps.inner.vertical   = 8
+gaps.outer.left       = 8
+gaps.outer.bottom     = 8
+gaps.outer.top        = 8
+gaps.outer.right      = 8
+
+# Window rules
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+# =================================================================
+# MAIN KEYBINDINGS (mode.main.binding)
+# Translates Hyprland $mainMod (SUPER) -> alt (Option)
+# =================================================================
+[mode.main.binding]
+
+# --- Apps (Hyprland lines 9-14) ---
+# Super + Return -> Terminal
+alt-enter = 'exec-and-forget open -a Ghostty'
+
+# Super + Shift + O -> File Manager (Finder / Thunar)
+alt-shift-o = 'exec-and-forget open -a Finder'
+
+# Super + B -> Browser (Chrome / Zen)
+alt-b = 'exec-and-forget open -a "Google Chrome"'
+
+# --- Window Manager Control (Hyprland lines 17-24) ---
+# Super + Shift + Q -> killactive (close focused window)
+alt-shift-q = 'close'
+
+# Super + F -> toggle floating / tiling
+alt-f = 'layout floating tiling'
+
+# Native macOS Fullscreen
+alt-shift-f = 'macos-native-fullscreen'
+
+# Super + Tab -> previous workspace (back and forth)
+alt-tab = 'workspace-back-and-forth'
+
+# Layout toggles (tiles / accordion)
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+
+# --- Focus Movement (Hyprland lines 27-30) ---
+# Super + h/j/k/l -> movefocus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# --- Window Movement (Hyprland movewindow) ---
+# Super + Shift + h/j/k/l -> move window direction
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# --- Monitor Movement (Hyprland movecurrentworkspacetomonitor) ---
+alt-ctrl-h = 'move-workspace-to-monitor left'
+alt-ctrl-j = 'move-workspace-to-monitor down'
+alt-ctrl-k = 'move-workspace-to-monitor up'
+alt-ctrl-l = 'move-workspace-to-monitor right'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# --- Workspaces: QWE-ASD-ZXC Layout (Hyprland lines 37-59) ---
+# Row 1 (Q, W, E -> 1, 2, 3)
+alt-q = 'workspace 1'
+alt-w = 'workspace 2'
+alt-e = 'workspace 3'
+
+# Row 2 (A, S, D -> 4, 5, 6)
+alt-a = 'workspace 4'
+alt-s = 'workspace 5'
+alt-d = 'workspace 6'
+
+# Row 3 (Z, X, C -> 7, 8, 9)
+alt-z = 'workspace 7'
+alt-x = 'workspace 8'
+alt-c = 'workspace 9'
+
+# Move window to workspace (QWE-ASD-ZXC)
+# (Note: alt-shift-q is reserved for 'close', mirroring Hyprland killactive)
+alt-shift-w = 'move-node-to-workspace 2'
+alt-shift-e = 'move-node-to-workspace 3'
+alt-shift-a = 'move-node-to-workspace 4'
+alt-shift-s = 'move-node-to-workspace 5'
+alt-shift-d = 'move-node-to-workspace 6'
+alt-shift-z = 'move-node-to-workspace 7'
+alt-shift-x = 'move-node-to-workspace 8'
+alt-shift-c = 'move-node-to-workspace 9'
+
+# --- Numeric Workspaces (Hyprland lines 61-81) ---
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
+
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
+
+# --- Special Workspace / Scratchpad (Hyprland special:magic) ---
+alt-space = 'workspace --auto-back-and-forth magic'
+alt-shift-space = 'move-node-to-workspace magic'
+
+# --- Quick Resize (Hyprland lines 32-35) ---
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+alt-shift-r = 'mode resize'
+
+# --- Service Mode ---
+alt-shift-semicolon = 'mode service'
+
+# =================================================================
+# RESIZE MODE
+# =================================================================
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+b = 'balance-sizes'
+enter = 'mode main'
+esc = 'mode main'
+
+# =================================================================
+# SERVICE MODE
+# =================================================================
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']
+f = ['layout floating tiling', 'mode main']
+backspace = ['close-all-windows-but-current', 'mode main']
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
