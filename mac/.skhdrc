@@ -48,13 +48,18 @@ shift + alt - k : yabai -m window --display north 2>/dev/null; yabai -m display 
 # Shift + Option + J -> Move window to monitor below & follow focus
 shift + alt - j : yabai -m window --display south 2>/dev/null; yabai -m display --focus south 2>/dev/null || true
 
-# --- Quick Window Placement (Grid snaps in float mode) ---
-# Snap to Left Half
+# --- Quick Window Placement & Maximize with Gaps ---
+# Toggle Fullscreen / Maximize with Gaps (Option + F)
+alt - f            : ~/.local/bin/toggle-maximize
+# Override macOS native fullscreen shortcut (Ctrl + Cmd + F)
+ctrl + cmd - f     : ~/.local/bin/toggle-maximize
+
+# Snap to Left Half (with gaps)
 alt + ctrl - left  : yabai -m window --grid 1:2:0:0:1:1
-# Snap to Right Half
+# Snap to Right Half (with gaps)
 alt + ctrl - right : yabai -m window --grid 1:2:1:0:1:1
-# Maximize Window Frame
-alt + ctrl - up    : yabai -m window --grid 1:1:0:0:1:1
+# Maximize Window Frame Toggle
+alt + ctrl - up    : ~/.local/bin/toggle-maximize
 # Center Window (80% width/height)
 alt + ctrl - down  : yabai -m window --grid 10:10:1:1:8:8
 
