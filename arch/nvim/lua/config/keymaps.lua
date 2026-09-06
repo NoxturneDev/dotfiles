@@ -180,6 +180,7 @@ vim.keymap.set("n", "<leader>tt", function()
     transparent_background = transparent_enabled,
   })
   catppuccin.setup(opts)
+  catppuccin.compile()
   vim.cmd.colorscheme("catppuccin")
   vim.notify(transparent_enabled and "Transparency ON" or "Transparency OFF", vim.log.levels.INFO)
 end, { desc = "Toggle background transparency" })
