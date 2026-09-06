@@ -12,6 +12,9 @@ macos-option-as-alt = left
 keybind = super+d=unbind
 keybind = super+shift+d=unbind
 
+# Forward Command+P (⌘P) as Ctrl+P (\x10) to terminal for Neovim/fzf
+keybind = super+p=text:\x10
+
 # Window styling
 macos-titlebar-style = transparent
 window-padding-x = 8

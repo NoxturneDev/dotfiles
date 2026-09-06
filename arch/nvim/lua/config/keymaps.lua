@@ -74,6 +74,7 @@ vim.keymap.set("n", "QQ", ":bd<CR>", {
 local builtin = require("telescope.builtin")
 
 keymap.set("n", "<C-p>", builtin.find_files, { desc = "Search files" })
+keymap.set("n", "<D-p>", builtin.find_files, { desc = "Search files" })
 
 vim.keymap.set("n", "<C-k>", function()
   vim.cmd("enew")

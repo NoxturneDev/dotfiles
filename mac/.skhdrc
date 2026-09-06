@@ -65,3 +65,8 @@ alt + ctrl - down  : yabai -m window --grid 10:10:1:1:8:8
 
 # --- Reload Configs ---
 ctrl + alt - r : yabai --restart-service; skhd --restart-service
+
+# --- Disable Annoying macOS Defaults ---
+# Swallow Cmd + H (prevents hiding / minimizing the current application)
+cmd - h : :
+
