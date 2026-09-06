@@ -38,26 +38,52 @@ return {
       transparent_background = true, -- optional
       custom_highlights = function(colors)
         return {
-          -- Control Flow & Statements (Vibrant Red)
-          ["@keyword.return"] = { fg = colors.red, bold = true },
-          ["@keyword.conditional"] = { fg = colors.red, bold = true },
-          ["@keyword.conditional.ternary"] = { fg = colors.red },
-          ["@keyword.repeat"] = { fg = colors.red, bold = true },
-          ["@keyword.exception"] = { fg = colors.red, bold = true },
-          ["@keyword.coroutine"] = { fg = colors.red },
-          ["@lsp.typemod.keyword.controlFlow"] = { fg = colors.red, bold = true },
-          Conditional = { fg = colors.red, bold = true },
-          Repeat = { fg = colors.red, bold = true },
-          Exception = { fg = colors.red, bold = true },
+          -- Control Flow & Statements (Mauve Purple)
+          ["@keyword.return"] = { fg = colors.mauve, bold = true },
+          ["@keyword.conditional"] = { fg = colors.mauve, bold = true },
+          ["@keyword.conditional.ternary"] = { fg = colors.mauve },
+          ["@keyword.repeat"] = { fg = colors.mauve, bold = true },
+          ["@keyword.exception"] = { fg = colors.mauve, bold = true },
+          ["@keyword.coroutine"] = { fg = colors.mauve },
+          ["@lsp.typemod.keyword.controlFlow"] = { fg = colors.mauve, bold = true },
+          Conditional = { fg = colors.mauve, bold = true },
+          Repeat = { fg = colors.mauve, bold = true },
+          Exception = { fg = colors.mauve, bold = true },
 
-          -- JSX / HTML Tags & Components (Vibrant Red)
+          -- JSX / HTML Tags & Components (Coral Red)
           ["@tag"] = { fg = colors.red, bold = true },
+          ["@tag.javascript"] = { fg = colors.red, bold = true },
+          ["@tag.jsx"] = { fg = colors.red, bold = true },
+          ["@tag.tsx"] = { fg = colors.red, bold = true },
           ["@tag.builtin"] = { fg = colors.red },
-          ["@tag.attribute"] = { fg = colors.yellow, italic = true },
+          ["@tag.builtin.javascript"] = { fg = colors.red },
+          ["@tag.builtin.jsx"] = { fg = colors.red },
+          ["@tag.builtin.tsx"] = { fg = colors.red },
+          ["@tag.component"] = { fg = colors.red, bold = true },
+          ["@constructor.jsx"] = { fg = colors.red, bold = true },
+          ["@constructor.tsx"] = { fg = colors.red, bold = true },
           ["@tag.delimiter"] = { fg = colors.subtext0 },
-          htmlTagName = { fg = colors.red },
+          Tag = { fg = colors.red, bold = true },
+          htmlTagName = { fg = colors.red, bold = true },
           htmlTag = { fg = colors.subtext0 },
           htmlEndTag = { fg = colors.subtext0 },
+          jsxTagName = { fg = colors.red, bold = true },
+          jsxComponentName = { fg = colors.red, bold = true },
+
+          -- JSX / HTML Attributes & Properties (Mint Teal)
+          ["@tag.attribute"] = { fg = colors.teal, italic = true },
+          ["@tag.attribute.javascript"] = { fg = colors.teal, italic = true },
+          ["@tag.attribute.jsx"] = { fg = colors.teal, italic = true },
+          ["@tag.attribute.tsx"] = { fg = colors.teal, italic = true },
+          ["@property"] = { fg = colors.teal, italic = true },
+          ["@property.javascript"] = { fg = colors.teal, italic = true },
+          ["@property.typescript"] = { fg = colors.teal, italic = true },
+          ["@variable.member"] = { fg = colors.teal },
+          ["@field"] = { fg = colors.teal },
+          ["@lsp.type.property"] = { fg = colors.teal, italic = true },
+          ["@lsp.type.enumMember"] = { fg = colors.teal },
+          htmlArg = { fg = colors.teal, italic = true },
+          jsxAttrib = { fg = colors.teal, italic = true },
 
           -- Functions & Hooks (Bright Blue)
           ["@function"] = { fg = colors.blue, bold = true },
@@ -67,14 +93,7 @@ return {
           ["@function.builtin"] = { fg = colors.sapphire },
           Function = { fg = colors.blue, bold = true },
 
-          -- Object Properties & Members (Teal / Cyan)
-          ["@property"] = { fg = colors.teal },
-          ["@variable.member"] = { fg = colors.teal },
-          ["@field"] = { fg = colors.teal },
-          ["@lsp.type.property"] = { fg = colors.teal },
-          ["@lsp.type.enumMember"] = { fg = colors.teal },
-
-          -- Types & JSX Attributes (Warm Yellow)
+          -- Types (Warm Yellow)
           ["@type"] = { fg = colors.yellow },
           ["@type.builtin"] = { fg = colors.yellow },
           ["@type.definition"] = { fg = colors.yellow },
