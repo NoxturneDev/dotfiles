@@ -75,6 +75,8 @@ local builtin = require("telescope.builtin")
 
 keymap.set("n", "<C-p>", builtin.find_files, { desc = "Search files" })
 keymap.set("n", "<D-p>", builtin.find_files, { desc = "Search files" })
+keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP server(s)" })
+keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 
 vim.keymap.set("n", "<C-k>", function()
   vim.cmd("enew")
