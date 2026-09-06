@@ -36,6 +36,9 @@ return {
     opts = {
       flavour = "mocha", -- explicitly use mocha
       transparent_background = true, -- optional
+      compile = {
+        enabled = false,
+      },
       custom_highlights = function(colors)
         return {
           -- Control Flow & Statements (Mauve Purple)
@@ -168,9 +171,7 @@ return {
       },
     },
     config = function(_, opts)
-      local catppuccin = require("catppuccin")
-      catppuccin.setup(opts)
-      catppuccin.compile()
+      require("catppuccin").setup(opts)
       vim.cmd.colorscheme("catppuccin")
     end,
   },
