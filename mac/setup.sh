@@ -16,6 +16,7 @@ ln -sf "$DIR/.aerospace.toml" "$HOME/.aerospace.toml"
 
 # App & Local Bin Configs
 mkdir -p "$HOME/.config/ghostty" "$HOME/.local/bin"
+ln -sfn "$DIR/nvim" "$HOME/.config/nvim"
 ln -sf "$DIR/.config/ghostty/config" "$HOME/.config/ghostty/config"
 ln -sf "$DIR/.local/bin/switch-space" "$HOME/.local/bin/switch-space"
 ln -sf "$DIR/.local/bin/toggle-maximize" "$HOME/.local/bin/toggle-maximize"

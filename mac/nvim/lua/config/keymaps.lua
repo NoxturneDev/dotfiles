@@ -74,6 +74,9 @@ vim.keymap.set("n", "QQ", ":bd<CR>", {
 local builtin = require("telescope.builtin")
 
 keymap.set("n", "<C-p>", builtin.find_files, { desc = "Search files" })
+keymap.set("n", "<D-p>", builtin.find_files, { desc = "Search files" })
+keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP server(s)" })
+keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 
 vim.keymap.set("n", "<C-k>", function()
   vim.cmd("enew")
@@ -168,21 +171,16 @@ vim.keymap.set("n", "<leader>ah", function()
   vim.cmd("copen")
 end, { desc = "Show file hunks in quickfix" })
 
--- Toggle neovim background transparency (reloads catppuccin)
+-- Toggle neovim background transparency (reloads catppuccin preserving custom highlights)
 local transparent_enabled = true
 vim.keymap.set("n", "<leader>tt", function()
   transparent_enabled = not transparent_enabled
-  require("catppuccin").setup({
-    flavour = "mocha",
+  local catppuccin = require("catppuccin")
+  local opts = vim.tbl_deep_extend("force", catppuccin.options, {
     transparent_background = transparent_enabled,
-    integrations = {
-      aerial = true, alpha = true, cmp = true, dashboard = true,
-      flash = true, fzf = true, gitsigns = true, illuminate = true,
-      mason = true, mini = true, native_lsp = { enabled = true },
-      neotest = true, neotree = true, noice = true, notify = true,
-      telescope = true, treesitter = true, which_key = true,
-    },
   })
+  catppuccin.setup(opts)
+  catppuccin.compile()
   vim.cmd.colorscheme("catppuccin")
   vim.notify(transparent_enabled and "Transparency ON" or "Transparency OFF", vim.log.levels.INFO)
 end, { desc = "Toggle background transparency" })

@@ -56,8 +56,9 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
-      phpactor = false,
-      intelephense = {},
+      gopls = {},
+      phpactor = { enabled = false },
+      intelephense = { enabled = true },
       vtsls = {
         settings = {
           typescript = {
