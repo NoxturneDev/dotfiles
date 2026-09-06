@@ -171,21 +171,15 @@ vim.keymap.set("n", "<leader>ah", function()
   vim.cmd("copen")
 end, { desc = "Show file hunks in quickfix" })
 
--- Toggle neovim background transparency (reloads catppuccin)
+-- Toggle neovim background transparency (reloads catppuccin preserving custom highlights)
 local transparent_enabled = true
 vim.keymap.set("n", "<leader>tt", function()
   transparent_enabled = not transparent_enabled
-  require("catppuccin").setup({
-    flavour = "mocha",
+  local catppuccin = require("catppuccin")
+  local opts = vim.tbl_deep_extend("force", catppuccin.options, {
     transparent_background = transparent_enabled,
-    integrations = {
-      aerial = true, alpha = true, cmp = true, dashboard = true,
-      flash = true, fzf = true, gitsigns = true, illuminate = true,
-      mason = true, mini = true, native_lsp = { enabled = true },
-      neotest = true, neotree = true, noice = true, notify = true,
-      telescope = true, treesitter = true, which_key = true,
-    },
   })
+  catppuccin.setup(opts)
   vim.cmd.colorscheme("catppuccin")
   vim.notify(transparent_enabled and "Transparency ON" or "Transparency OFF", vim.log.levels.INFO)
 end, { desc = "Toggle background transparency" })
