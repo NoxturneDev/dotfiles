@@ -21,6 +21,7 @@ ln -sf "$DIR/.config/ghostty/config" "$HOME/.config/ghostty/config"
 ln -sf "$DIR/.config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 ln -sf "$DIR/.local/bin/switch-space" "$HOME/.local/bin/switch-space"
 ln -sf "$DIR/.local/bin/toggle-maximize" "$HOME/.local/bin/toggle-maximize"
-chmod +x "$DIR/setup.sh" "$HOME/.local/bin/switch-space" "$HOME/.local/bin/toggle-maximize" "$HOME/.yabairc"
+ln -sf "$DIR/.local/bin/agy-w" "$HOME/.local/bin/agy-w"
+chmod +x "$DIR/setup.sh" "$HOME/.local/bin/switch-space" "$HOME/.local/bin/toggle-maximize" "$HOME/.local/bin/agy-w" "$HOME/.yabairc"
 
 echo "==> macOS dotfiles linked successfully!"

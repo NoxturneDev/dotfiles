@@ -653,14 +653,13 @@ alias tn="tmux new-session"
 alias clip="pbcopy"
 
 # =================================================================
-# DUAL-ACCOUNT PLATFORM MATRIX (ARCH NATIVE + GOOGLE SECURE CO-PILOT)
+# DUAL-ACCOUNT PLATFORM MATRIX (MAC NATIVE + GOOGLE SECURE CO-PILOT)
 # =================================================================
-alias gemini-p1='mkdir -p ~/.gemini-personal; HOME=$HOME/.gemini-personal gemini'
-alias agy-p1='mkdir -p ~/.antigravity-personal; HOME=$HOME/.antigravity-personal agy'
-
-
-alias gemini-p2='mkdir -p ~/.gemini-work; HOME=$HOME/.gemini-work gemini'
-alias agy-p2='mkdir -p ~/.antigravity-work; HOME=$HOME/.antigravity-work agy'
+# Default agy uses personal profile (~/.gemini/antigravity-cli)
+# agy-w uses isolated work profile (~/.antigravity-work)
+alias agy-w="$HOME/.local/bin/agy-w"
+alias agy-p1="agy"
+alias agy-p2="agy-w"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

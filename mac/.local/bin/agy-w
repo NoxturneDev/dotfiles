@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -e
+
+# Resolve base home directory
+if [[ -n "$REAL_HOME" ]]; then
+  BASE_HOME="$REAL_HOME"
+elif [[ "$HOME" == *".antigravity-work" ]]; then
+  BASE_HOME="$(dirname "$HOME")"
+else
+  BASE_HOME="$HOME"
+fi
+
+WORK_HOME="$BASE_HOME/.antigravity-work"
+mkdir -p "$WORK_HOME"
+
+# Ensure global configurations and credentials work transparently in work profile
+[ ! -e "$WORK_HOME/.gitconfig" ] && [ -f "$BASE_HOME/.gitconfig" ] && ln -sf "$BASE_HOME/.gitconfig" "$WORK_HOME/.gitconfig" 2>/dev/null || true
+[ ! -e "$WORK_HOME/.ssh" ] && [ -d "$BASE_HOME/.ssh" ] && ln -sf "$BASE_HOME/.ssh" "$WORK_HOME/.ssh" 2>/dev/null || true
+[ ! -e "$WORK_HOME/.zshrc" ] && [ -f "$BASE_HOME/.zshrc" ] && ln -sf "$BASE_HOME/.zshrc" "$WORK_HOME/.zshrc" 2>/dev/null || true
+[ ! -e "$WORK_HOME/.zprofile" ] && [ -f "$BASE_HOME/.zprofile" ] && ln -sf "$BASE_HOME/.zprofile" "$WORK_HOME/.zprofile" 2>/dev/null || true
+[ ! -e "$WORK_HOME/.config" ] && [ -d "$BASE_HOME/.config" ] && ln -sf "$BASE_HOME/.config" "$WORK_HOME/.config" 2>/dev/null || true
+
+mkdir -p "$WORK_HOME/.local"
+[ ! -e "$WORK_HOME/.local/bin" ] && [ -d "$BASE_HOME/.local/bin" ] && ln -sf "$BASE_HOME/.local/bin" "$WORK_HOME/.local/bin" 2>/dev/null || true
+
+# Find agy binary
+AGY_BIN="$BASE_HOME/.local/bin/agy"
+if [ ! -x "$AGY_BIN" ]; then
+  AGY_BIN="$(command -v agy || true)"
+fi
+
+if [ -z "$AGY_BIN" ] || [ ! -x "$AGY_BIN" ]; then
+  echo "Error: agy binary not found in $BASE_HOME/.local/bin or PATH." >&2
+  exit 1
+fi
+
+export REAL_HOME="$BASE_HOME"
+exec env HOME="$WORK_HOME" "$AGY_BIN" "$@"
