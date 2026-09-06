@@ -1,0 +1,8 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+s"
+
+[theme]
+name = "catppuccin"
+auto_switch = false
