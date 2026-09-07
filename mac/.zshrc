@@ -10,9 +10,11 @@ export ZSH="$HOME/.oh-my-zsh"
 export NVM_DIR=~/.nvm
  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-export PATH="$HOME/.local/bin:$PATH" 
+export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="$HOME/go/bin:$PATH"
+
+export PATH="$HOME/.bun/bin:$PATH"
 
 export WORKSPACE="$HOME/Projects"
 # Set name of the theme to load --- if set to "random", it will
@@ -670,3 +672,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # Prevent tmux socket cleanup by systemd-tmpfiles
 export TMUX_TMPDIR="$HOME/.tmux/tmp"
 
+
+# opencode
+export PATH=/Users/noxturnedev/.opencode/bin:$PATH
+
+# Agent scripts
+export PATH="$HOME/Projects/agents/scripts:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"

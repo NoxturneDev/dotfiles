@@ -96,6 +96,34 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- FLutter tools keymap
+vim.keymap.set("n", "<leader>Fr", "<cmd>FlutterReload<cr>", {
+  desc = "Flutter Hot Reload",
+})
+
+vim.keymap.set("n", "<leader>FR", "<cmd>FlutterRestart<cr>", {
+  desc = "Flutter Hot Restart",
+})
+
+vim.keymap.set("n", "<leader>fq", "<cmd>FlutterQuit<cr>", {
+  desc = "Flutter Quit",
+})
+
+vim.keymap.set("n", "<leader>fd", "<cmd>FlutterDevices<cr>", {
+  desc = "Flutter Devices",
+})
+
+vim.keymap.set("n", "<leader>fE", "<cmd>FlutterEmulators<cr>", {
+  desc = "Flutter Emulators",
+})
+vim.keymap.set("n", "<leader>fa", "<cmd>FlutterRun<cr>", {
+  desc = "Flutter Run",
+})
+
+vim.keymap.set("n", "<leader>fl", "<cmd>FlutterLogToggle<cr>", {
+  desc = "Flutter Log Toggle",
+})
+
 -- Agent Monitor: Track all agent code changes
 vim.keymap.set("n", "<leader>am", function()
   require("agent-monitor").open()
@@ -117,14 +145,18 @@ vim.keymap.set("n", "<leader>ah", function()
     return
   end
 
-  local git_root = vim.fn.system("git -C " .. vim.fn.shellescape(vim.fn.fnamemodify(file, ":h")) .. " rev-parse --show-toplevel"):gsub("\n", "")
+  local git_root = vim.fn
+    .system("git -C " .. vim.fn.shellescape(vim.fn.fnamemodify(file, ":h")) .. " rev-parse --show-toplevel")
+    :gsub("\n", "")
   if vim.v.shell_error ~= 0 then
     vim.notify("Not in a git repo", vim.log.levels.WARN)
     return
   end
 
   local rel_file = file:sub(#git_root + 2)
-  local output = vim.fn.system("git -C " .. vim.fn.shellescape(git_root) .. " diff --no-color -U0 -- " .. vim.fn.shellescape(rel_file))
+  local output = vim.fn.system(
+    "git -C " .. vim.fn.shellescape(git_root) .. " diff --no-color -U0 -- " .. vim.fn.shellescape(rel_file)
+  )
 
   local items = {}
   local current_lnum = 0
